@@ -7,8 +7,6 @@ import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:restaurant_app/data/db/database_helper.dart';
 import 'package:restaurant_app/provider/database_provider.dart';
-import 'package:restaurant_app/provider/detail_page_provider.dart';
-import 'package:restaurant_app/provider/search_list_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:restaurant_app/common/navigation.dart';
@@ -28,6 +26,8 @@ import 'package:restaurant_app/ui/detail_menu.dart';
 
 import 'package:restaurant_app/utils/background_service.dart';
 import 'package:restaurant_app/utils/notification_helper.dart';
+
+import 'package:http/http.dart' as http;
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => RestaurantProvider(
-            apiService: ApiService(),
+            apiService: ApiService(http.Client()),
           ),
         ),
         ChangeNotifierProvider(

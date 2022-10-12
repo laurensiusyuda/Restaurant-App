@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/provider/detail_page_provider.dart';
 import 'package:restaurant_app/ui/description.dart';
+import 'package:http/http.dart' as http;
 
 class DetailRestaurant extends StatelessWidget {
   static const routeName = '/restaurant_detail';
@@ -17,7 +18,8 @@ class DetailRestaurant extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<DetailRestaurantProvider>(
-      create: (_) => DetailRestaurantProvider(apiService: ApiService(), id: id),
+      create: (_) => DetailRestaurantProvider(
+          apiService: ApiService(http.Client()), id: id),
       child: Scaffold(
         body: Consumer<DetailRestaurantProvider>(
           builder: (context, state, _) {

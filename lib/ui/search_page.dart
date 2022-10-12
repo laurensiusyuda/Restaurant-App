@@ -6,6 +6,7 @@ import 'package:restaurant_app/common/style.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/widgets/card_restaurant.dart';
 import 'package:restaurant_app/provider/search_list_provider.dart';
+import 'package:http/http.dart' as http;
 
 class SearchRestaurant extends StatelessWidget {
   const SearchRestaurant({super.key});
@@ -13,7 +14,8 @@ class SearchRestaurant extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SearchRestaurantProvider>(
-      create: (_) => SearchRestaurantProvider(apiService: ApiService()),
+      create: (_) =>
+          SearchRestaurantProvider(apiService: ApiService(http.Client())),
       child: Scaffold(
           appBar: AppBar(
             title: const Text('Search Page Restaurant'),
